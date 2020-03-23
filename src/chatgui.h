@@ -1,5 +1,6 @@
 #ifndef CHATGUI_H_
 #define CHATGUI_H_
+#include <memory>
 
 #include <wx/wx.h>
 
@@ -16,7 +17,7 @@ private:
     //// STUDENT CODE
     ////
 
-    ChatLogic *_chatLogic;
+    std::unique_ptr <ChatLogic> _chatLogic;
 
     ////
     //// EOF STUDENT CODE
@@ -27,7 +28,7 @@ public:
     ~ChatBotPanelDialog();
 
     // getter / setter
-    ChatLogic *GetChatLogicHandle() { return _chatLogic; }
+    ChatLogic *GetChatLogicHandle() { return _chatLogic.get(); }
 
     // events
     void paintEvent(wxPaintEvent &evt);
@@ -91,9 +92,12 @@ public:
 // wxWidgets app that hides main()
 class ChatBotApp : public wxApp
 {
+private:
+    //ChatBotFrame *chatBotFrame;
 public:
     // events
     virtual bool OnInit();
+
 };
 
 #endif /* CHATGUI_H_ */
