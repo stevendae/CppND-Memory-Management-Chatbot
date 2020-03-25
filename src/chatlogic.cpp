@@ -21,7 +21,7 @@ ChatLogic::ChatLogic()
     //_chatBot = new ChatBot("../images/chatbot.png");
 
     // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-    _chatBot->SetChatLogicHandle(this);
+    //_chatBot->SetChatLogicHandle(this);
 
     ////
     //// EOF STUDENT CODE
@@ -183,10 +183,10 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                 else
                 {
                     std::cout << "Error: ID missing. Line is ignored!" << std::endl;
-                }_chatBot = new ChatBot("../images/chatbot.png");
-            }_chatBot = new ChatBot("../images/chatbot.png");
-        } // eof loop over all lines in the fil_chatBot = new ChatBot("../images/chatbot.png");e
-_chatBot = new ChatBot("../images/chatbot.png");
+                }
+            }
+        }
+
         file.close();
 
     } // eof check for file availability

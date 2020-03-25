@@ -36,7 +36,7 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 ////
 void GraphNode::MoveChatbotHere(ChatBot chatbot)
 {
-    _chatBot = std::move(chatbot);
+    _chatBot = ChatBot(std::move(chatbot)); // This fixed the seg fault passed move assign operator
     _chatBot.SetCurrentNode(this);
 }
 
