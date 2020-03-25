@@ -36,13 +36,21 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 ////
 void GraphNode::MoveChatbotHere(ChatBot chatbot)
 {
+<<<<<<< HEAD
     _chatBot = ChatBot(std::move(chatbot)); // This fixed the seg fault passed move assign operator
+=======
+    _chatBot = std::move(chatbot);
+>>>>>>> debug
     _chatBot.SetCurrentNode(this);
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
     newNode->MoveChatbotHere(std::move(_chatBot));
+<<<<<<< HEAD
+=======
+    //_chatBot = nullptr; // invalidate pointer at source
+>>>>>>> debug
 }
 ////
 //// EOF STUDENT CODE

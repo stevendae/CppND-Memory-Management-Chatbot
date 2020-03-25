@@ -49,9 +49,10 @@ ChatBot::ChatBot(const ChatBot &source)
 {
     // Default Shallow Copy - Avoid Use Given That A ChatBot Owns its Own Image
     std::cout << "ChatBot Copy Constructor" << std::endl;
-    this->_image = source._image;
-    this->_chatLogic = source._chatLogic;
+    this->_image = new wxBitmap(*source._image);
+    this->_chatLogic->SetChatbotHandle(this);
     this->_rootNode = source._rootNode;
+    this->_currentNode = source._currentNode;
 }
 
 ChatBot &ChatBot::operator=(const ChatBot &source)
@@ -60,10 +61,12 @@ ChatBot &ChatBot::operator=(const ChatBot &source)
     if (this == &source){
         return *this;
     }
-    delete _image;
-    this->_image = source._image;
+
+    this->_image = new wxBitmap(*source._image);
     this->_chatLogic = source._chatLogic;
+    this->_chatLogic->SetChatbotHandle(this);
     this->_rootNode = source._rootNode;
+    this->_currentNode = source._currentNode;
 
     return *this; 
 }
@@ -73,11 +76,14 @@ ChatBot::ChatBot(ChatBot &&source)
     std::cout << "ChatBot Move Constructor" << std::endl;
     this->_image = source._image;
     this->_chatLogic = source._chatLogic;
+    this->_chatLogic->SetChatbotHandle(this);
     this->_rootNode = source._rootNode;
+    this->_currentNode = source._currentNode;
 
     source._image = NULL;
     source._chatLogic = nullptr;
     source._rootNode = nullptr;
+    source._currentNode = nullptr;
 }
 
 ChatBot &ChatBot::operator=(ChatBot &&source)
@@ -86,14 +92,19 @@ ChatBot &ChatBot::operator=(ChatBot &&source)
     if (this == &source){
         return *this;
     }
-    delete _image;
+    if(this->_image != NULL) {
+        delete this->_image;
+    }
     this->_image = source._image;
     this->_chatLogic = source._chatLogic;
+    this->_chatLogic -> SetChatbotHandle(this);
     this->_rootNode = source._rootNode;
+    this->_currentNode = source._currentNode;
 
     source._image = NULL;
     source._chatLogic = nullptr;
     source._rootNode = nullptr;
+    source._currentNode = nullptr;
 
     return *this;
 }
